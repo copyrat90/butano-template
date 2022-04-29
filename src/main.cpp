@@ -1,10 +1,10 @@
-#include "bn_core.h"
+#include <bn_core.h>
 
 int main()
 {
     bn::core::init();
 
-    while(true)
+    while (true)
     {
         bn::core::update();
     }
