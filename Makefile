@@ -25,7 +25,7 @@
 #---------------------------------------------------------------------------------------------------------------------
 TARGET      :=  $(notdir $(CURDIR))
 BUILD       :=  build
-LIBBUTANO   :=  D:/Library/butano/butano
+LIBBUTANO   :=  C:/Libs/butano/butano
 PYTHON      :=  python
 MOD2GBT     :=
 SOURCES     :=  src
