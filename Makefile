@@ -27,7 +27,7 @@
 #---------------------------------------------------------------------------------------------------------------------
 TARGET      :=  $(notdir $(CURDIR))
 BUILD       :=  build
-LIBBUTANO   :=  C:/Libs/butano/butano
+LIBBUTANO   :=  ../butano
 PYTHON      :=  python
 SOURCES     :=  src
 INCLUDES    :=  include

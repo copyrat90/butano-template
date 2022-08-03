@@ -8,8 +8,8 @@ This template is meant to be used on [VSCode](https://code.visualstudio.com/), w
 ## Changing paths
 
 You need to change some paths in this template so that they suit your environment.
-1. Change `LIBBUTANO :=` on [Makefile](Makefile) to your location for Butano.
-2. Change `-I` lines on [compile_flags.txt](compile_flags.txt) to your location for Butano.
+1. Change `LIBBUTANO :=` on [Makefile](Makefile#L30) to your location for Butano.
+2. Change `-I` lines on [compile_flags.txt](compile_flags.txt#L3) to your location for Butano.
 
 
 ## Setting up debugger
