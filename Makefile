@@ -13,13 +13,14 @@
 # ROMCODE is a uppercase ASCII, max 4 characters text string containing the output ROM code.
 # USERFLAGS is a list of additional compiler flags:
 #     Pass -flto to enable link-time optimization.
-#     Pass -Og to improve debugging.
+#     Pass -O0 or -Og to try to make debugging work.
 # USERASFLAGS is a list of additional assembler flags.
 # USERLDFLAGS is a list of additional linker flags:
 #     Pass -flto=<number_of_cpu_cores> to enable parallel link-time optimization.
 # USERLIBDIRS is a list of additional directories containing libraries.
 #     Each libraries directory must contains include and lib subdirectories.
 # USERLIBS is a list of additional libraries to link with the project.
+# DEFAULTLIBS links standard system libraries when it is not empty.
 # USERBUILD is a list of additional directories to remove when cleaning the project.
 # EXTTOOL is an optional command executed before processing audio, graphics and code files.
 #
@@ -42,6 +43,7 @@ USERASFLAGS :=
 USERLDFLAGS :=  
 USERLIBDIRS :=  
 USERLIBS    :=  
+DEFAULTLIBS :=  
 USERBUILD   :=  
 EXTTOOL     :=  
 
