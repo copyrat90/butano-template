@@ -4,6 +4,9 @@ GBA gamedev template for [Butano engine](https://github.com/GValiente/butano).
 
 This template is meant to be used on [VSCode](https://code.visualstudio.com/), with [Native Debug](https://marketplace.visualstudio.com/items?itemName=webfreak.debug) extension.
 
+> This template is copied from [butano/template](https://github.com/GValiente/butano/tree/master/template), with my own tweaks.\
+> It'll be better off just using the [official template](https://github.com/GValiente/butano/tree/master/template) that's always up-to-date,\
+> and read this *README.md* as a guide to set it up with VSCode.
 
 ## Changing paths
 
@@ -19,11 +22,4 @@ You need to change some paths in this template so that they suit your environmen
 
 ## Setting up debugger
 
-[launch.json](launch.json) and [tasks.json](tasks.json) are provided to easily debug your game with [mGBA](https://mgba.io/).
-
-1. Add `mgba` and `devkitARM/bin/arm-none-eabi-gdb` executables to your `PATH`.
-2. Install [Native Debug extension](https://marketplace.visualstudio.com/items?itemName=webfreak.debug) on VSCode.
-3. Settings done; Hit F5 on VSCode to debug.
-
-Optionally, add `-Og` to `USERFLAGS` on Makefile to improve debugging.\
-Don't forget to remove `-Og` before your actual release!
+[See this guide.](https://felixjones.co.uk/mgba_gdb/vscode.html)

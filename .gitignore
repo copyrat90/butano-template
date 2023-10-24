@@ -1,8 +1,6 @@
 
 # vscode
-.vscode/*
-!.vscode/launch.json
-!.vscode/tasks.json
+.vscode/
 
 # build output 
 build/
