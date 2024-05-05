@@ -1,4 +1,4 @@
-name: CI
+name: CD
 
 on: [push, pull_request]
 
@@ -47,3 +47,17 @@ jobs:
           export PATH=/opt/wonderful/bin:$PATH
           export WONDERFUL_TOOLCHAIN=/opt/wonderful
           make -j$(nproc)
+
+      - name: Pack
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          mkdir -p licenses/butano/
+          cp -r butano/licenses/* licenses/butano/
+          rm -f licenses/butano/devkitarm*
+          zip -r butano-template-${GITHUB_REF_NAME}.zip *.gba licenses
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: butano-template-*.zip
