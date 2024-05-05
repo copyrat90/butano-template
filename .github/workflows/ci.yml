@@ -8,27 +8,33 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - id: devkitpro-buildscripts-latest-release
-        uses: pozetroninc/github-action-get-latest-release@v0.8.0
+      - name: Check update for wonderful toolchain `target-gba-syslibs`
+        id: wonderful-latest-commit
+        uses: nmbgeek/github-action-get-latest-commit@main
         with:
-          repository: devkitPro/buildscripts
+          repository: WonderfulToolchain/target-gba-syslibs
 
-      - name: Cache devkitARM
-        id: cache-devkitarm
+      - name: Cache wonderful toolchain
+        id: cache-wonderful
         uses: actions/cache@v3
         env:
-          cache-name: cache-devkitarm-packages
+          cache-name: wonderful-toolchain
         with:
-          path: /opt/devkitpro/!(pacman)/**
-          key: ${{runner.os}}-devkitarm-${{steps.devkitpro-buildscripts-latest-release.outputs.id}}
-      
-      - name: Install devkitARM
-        if: ${{steps.cache-devkitarm.outputs.cache-hit != 'true'}}
+          path: /opt/wonderful
+          key: ${{runner.os}}-wonderful-${{steps.wonderful-latest-commit.outputs.hash}}
+
+      - name: Install wonderful toolchain
+        if: ${{steps.cache-wonderful.outputs.cache-hit != 'true'}}
         run: |
-          wget https://apt.devkitpro.org/install-devkitpro-pacman
-          chmod +x ./install-devkitpro-pacman
-          sudo yes | sudo ./install-devkitpro-pacman
-          sudo dkp-pacman -S gba-dev --noconfirm
+          mkdir /opt/wonderful
+          cd /opt/wonderful
+          wget -qO- https://wonderful.asie.pl/bootstrap/wf-bootstrap-x86_64.tar.gz | tar xvz
+          export PATH=/opt/wonderful/bin:$PATH
+          export WONDERFUL_TOOLCHAIN=/opt/wonderful
+          wf-pacman -Syu --noconfirm
+          wf-pacman -S toolchain-gcc-arm-none-eabi --noconfirm
+          wf-pacman -S thirdparty-blocksds-toolchain --noconfirm
+          wf-pacman -S target-gba --noconfirm
 
       - name: Clone Butano
         uses: actions/checkout@v4
@@ -38,8 +44,6 @@ jobs:
 
       - name: Build
         run: |
-          export DEVKITPRO=/opt/devkitpro
-          export DEVKITARM=${DEVKITPRO}/devkitARM
-          export DEVKITPPC=${DEVKITPRO}/devkitPPC
-          export PATH=${DEVKITPRO}/tools/bin:$PATH
-          make -j2
+          export PATH=/opt/wonderful/bin:$PATH
+          export WONDERFUL_TOOLCHAIN=/opt/wonderful
+          make -j$(nproc)
