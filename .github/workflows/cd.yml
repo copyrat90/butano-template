@@ -31,10 +31,12 @@ jobs:
           wget -qO- https://wonderful.asie.pl/bootstrap/wf-bootstrap-x86_64.tar.gz | tar xvz
           export PATH=/opt/wonderful/bin:$PATH
           export WONDERFUL_TOOLCHAIN=/opt/wonderful
+          wf-pacman -Syu wf-tools --noconfirm
+          wf-pacman -Syu wf-tools --noconfirm
+          wf-config repo enable blocksds
           wf-pacman -Syu --noconfirm
-          wf-pacman -S toolchain-gcc-arm-none-eabi --noconfirm
-          wf-pacman -S thirdparty-blocksds-toolchain --noconfirm
           wf-pacman -S target-gba --noconfirm
+          wf-pacman -S blocksds-toolchain --noconfirm
 
       - name: Clone Butano
         uses: actions/checkout@v4
